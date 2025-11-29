@@ -1,0 +1,14 @@
+{
+  "name": "autoqa",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently \"yarn workspace frontend dev\" \"yarn workspace backend start:dev\" \"yarn workspace worker dev\"",
+    "test": "jest --passWithNoTests"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

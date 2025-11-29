@@ -1,0 +1,10 @@
+name: Deploy
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ${{ secrets.DOCKER_REPO }}/autoqa:${{ github.sha }} .
+      - run: docker push ${{ secrets.DOCKER_REPO }}/autoqa:${{ github.sha }}
+      # Deploy to K8s using kubectl actions
