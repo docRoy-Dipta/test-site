@@ -1,7 +1,25 @@
+# Use Node.js LTS image
 FROM node:20
-WORKDIR /app/apps/backend
-COPY package.json yarn.lock ./
-RUN yarn install
-COPY . .
+
+WORKDIR /app
+
+# Copy package.json (no yarn.lock needed if using npm)
+COPY apps/backend/package.json ./ 
+
+# Install dependencies
+RUN npm install
+
+# Copy prisma folder first (for prisma generate)
+COPY apps/backend/prisma ./prisma
+
+# Generate Prisma client
 RUN npx prisma generate
-CMD ["yarn", "start:prod"]
+
+# Copy backend source code
+COPY apps/backend/src ./src
+
+# Expose backend port
+EXPOSE 4000
+
+# Start the backend
+CMD ["npm", "run", "start:prod"]
