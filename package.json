@@ -2,14 +2,19 @@
   "name": "autoqa",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "concurrently \"yarn workspace frontend dev\" \"yarn workspace backend start:dev\" \"yarn workspace worker dev\"",
     "test": "jest --passWithNoTests"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.22",
     "concurrently": "^8.0.0",
-    "typescript": "^5.0.0",
-    "minio": "^7.0.0"
+    "minio": "^7.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.0.0"
   }
 }

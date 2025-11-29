@@ -1,7 +1,21 @@
+# Use official Node.js image
 FROM node:20
+
+# Set working directory inside container
 WORKDIR /app/apps/frontend
-COPY package.json yarn.lock ./
-RUN yarn install
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copy all other files
 COPY . .
-RUN yarn build
-CMD ["yarn", "start"]
+
+# Build the Next.js app
+RUN npm run build
+
+# Expose default Next.js port
+EXPOSE 3000
+
+# Start the Next.js app
+CMD ["npm", "start"]
